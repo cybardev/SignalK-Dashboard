@@ -59,7 +59,11 @@ const AIS = () => ({
 const DEPTH = () => ({
     meta: {
         title: "Depth",
-        data: ["Below Transducer", "Transducer to Keel", "Below Keel"],
+        data: [
+            "Below Transducer (m)",
+            "Transducer to Keel (m)",
+            "Below Keel (m)",
+        ],
         endpoint: SELF + "environment/depth/",
         show: true,
     },
@@ -93,7 +97,7 @@ const DEPTH = () => ({
 const WIND = () => ({
     meta: {
         title: "Wind",
-        data: ["Apparent Speed", "Angle from Port"],
+        data: ["Apparent Speed (m/s)", "Angle from Port (rad)"],
         endpoint: SELF + "environment/wind/",
         show: true,
     },
