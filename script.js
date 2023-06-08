@@ -128,7 +128,7 @@ const AUDIO = () => ({
         title: "Audio",
         data: ["File", "Status"],
         endpoint: SELF + "audio/",
-        show: true,
+        show: false,
     },
 
     data: ["", ""],
