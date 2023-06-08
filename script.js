@@ -24,9 +24,9 @@ const GPS = () => ({
         this.data[0] = await UTILS.fetchText(
             this.meta.endpoint + "gnss/satellites/value/"
         );
-        [this.data[1], this.data[2]] = Object.values(
+        Object.values(
             await UTILS.fetchJSON(this.meta.endpoint + "position/value/")
-        );
+        ).forEach((value, index) => (this.data[index + 1] = UTILS.trim(value)));
 
         // refresh data every 3 seconds
         setTimeout(() => this.init(), 3000);
@@ -164,7 +164,7 @@ const UTILS = {
         return null;
     },
     trim(num, dp = 8) {
-        return num.substring(0, num.indexOf(".") + 1 + dp);
+        return parseFloat(num).toFixed(dp);
     },
     async fetchJSON(url, callback) {
         return await fetch(url)
