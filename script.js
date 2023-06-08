@@ -5,7 +5,7 @@ const $$ = (selector) => {
 };
 
 /* ------------------------ API URLs ------------------------ */
-const HOST = "demo.signalk.org"; // "localhost:3443",
+const HOST = "demo.signalk.org"; // "localhost:3443", "demo.signalk.org"
 const SERVER = "https://" + HOST + "/signalk/v1/api/";
 const SELF = SERVER + "vessels/self/";
 
