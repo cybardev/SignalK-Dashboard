@@ -150,13 +150,13 @@ const AUDIO = () => ({
     },
 });
 
-/* * /
+/* */
 const COMPONENTS = {
-    gps: GPS(),
-    ais: AIS(),
-    depth: DEPTH(),
-    wind: WIND(),
-    audio: AUDIO(),
+    gps: GPS,
+    ais: AIS,
+    depth: DEPTH,
+    wind: WIND,
+    audio: AUDIO,
 };
 // */
 

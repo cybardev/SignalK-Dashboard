@@ -39,7 +39,7 @@
             <hr />
         </header>
         <main>
-            <section>
+            <!-- <section>
                 <aside x-cloak x-data="GPS" x-show="meta.show" x-transition>
                     <h3 x-text="meta.title"></h3>
                     <hr />
@@ -112,9 +112,9 @@
                         <span x-text="data[1]"></span>
                     </p>
                 </aside>
-            </section>
-            <!-- <section>
-                <template x-for="component in Object.keys(COMPONENTS)">
+            </section> --> 
+            <section x-data="{ components : COMPONENTS }">
+                <template x-for="component in Object.values(COMPONENTS)">
                     <aside
                         x-cloak
                         x-data="component"
@@ -131,7 +131,7 @@
                         </template>
                     </aside>
                 </template>
-            </section> -->
+            </section>
         </main>
         <script src="script.js"></script>
     </body>
