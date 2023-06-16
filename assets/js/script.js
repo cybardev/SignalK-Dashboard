@@ -12,7 +12,7 @@ const OTHER = SERVER + "vessels/urn:mrn:signalk:uuid:x-y-z/";
 
 /* ------------------ Dashboard Components ------------------ */
 const COMPONENTS = {
-    GPS: () => ({
+    GPS: {
         meta: {
             title: "GPS",
             data: ["Num. of Satellites", "Latitude", "Longitude"],
@@ -35,9 +35,9 @@ const COMPONENTS = {
             // refresh data every 3 seconds
             setTimeout(() => this.init(), 3000);
         },
-    }),
+    },
 
-    AIS: () => ({
+    AIS: {
         meta: {
             title: "AIS",
             data: ["Target MMSI", "Target Class", "Distance to Target (m)"],
@@ -58,9 +58,9 @@ const COMPONENTS = {
             // refresh data every 3 seconds
             setTimeout(() => this.init(), 3000);
         },
-    }),
+    },
 
-    DEPTH: () => ({
+    DEPTH: {
         meta: {
             title: "Depth",
             data: [
@@ -96,9 +96,9 @@ const COMPONENTS = {
             // refresh data every 3 seconds
             setTimeout(() => this.init(), 3000);
         },
-    }),
+    },
 
-    WIND: () => ({
+    WIND: {
         meta: {
             title: "Wind",
             data: ["Apparent Speed (m/s)", "Angle from Port (rad)"],
@@ -125,9 +125,9 @@ const COMPONENTS = {
             // refresh data every 3 seconds
             setTimeout(() => this.init(), 3000);
         },
-    }),
+    },
 
-    AUDIO: () => ({
+    AUDIO: {
         meta: {
             title: "Audio",
             data: ["File", "Status"],
@@ -152,7 +152,7 @@ const COMPONENTS = {
             // refresh data every 3 seconds
             setTimeout(() => this.init(), 3000);
         },
-    }),
+    },
 };
 
 /* -------------------- Utility Functions ------------------- */
