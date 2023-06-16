@@ -13,6 +13,14 @@ const OTHER =
     "vessels/urn:mrn:signalk:uuid:x-y-z/";
 
 /* ------------------ Dashboard Components ------------------ */
+const COMPONENTS = {
+    gps: GPS,
+    ais: AIS,
+    depth: DEPTH,
+    wind: WIND,
+    // audio: AUDIO,
+};
+
 const GPS = () => ({
     meta: {
         title: "GPS",
@@ -149,16 +157,6 @@ const AUDIO = () => ({
         setTimeout(() => this.init(), 3000);
     },
 });
-
-/* */
-const COMPONENTS = {
-    gps: GPS,
-    ais: AIS,
-    depth: DEPTH,
-    wind: WIND,
-    audio: AUDIO,
-};
-// */
 
 /* -------------------- Utility Functions ------------------- */
 const UTILS = {
