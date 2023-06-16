@@ -11,14 +11,21 @@
         <script src="assets/js/script.js"></script>
         <script defer src="assets/js/alpine.min.js"></script>
     </head>
-    <body>
+    <body x-data="{ components : COMPONENTS }">
         <header>
             <h1>Dashboard</h1>
             <h2>Vessel and Environment Information</h2>
             <hr />
+            <template x-for="component in Object.values(components)">
+                <span>
+                    <input type="checkbox" x-model="component.meta.show" />
+                    <span x-text="component.meta.title"></span>
+                    &nbsp;&nbsp;&nbsp;
+                </span>
+            </template>
         </header>
         <main>
-            <section x-data="{ components : COMPONENTS }">
+            <section>
                 <template x-for="component in Object.values(components)">
                     <aside
                         x-cloak
