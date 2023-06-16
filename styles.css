@@ -1,0 +1,24 @@
+[x-cloak] {
+    display: none !important;
+}
+
+body > * {
+    padding-block: 1rem;
+}
+
+aside > h3 {
+    text-transform: uppercase;
+}
+
+aside > hr,
+section > hr {
+    margin-block: 0.5em;
+}
+
+aside > p > span:nth-child(1) {
+    font-weight: bold;
+}
+
+aside > p > span:nth-child(2) {
+    float: right;
+}

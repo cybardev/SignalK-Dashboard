@@ -8,154 +8,151 @@ const $_ = (selector) => {
 const HOST = "demo.signalk.org"; // "localhost:3443", "demo.signalk.org"
 const SERVER = "https://" + HOST + "/signalk/v1/api/";
 const SELF = SERVER + "vessels/self/";
-const OTHER =
-    SERVER +
-    "vessels/urn:mrn:signalk:uuid:x-y-z/";
+const OTHER = SERVER + "vessels/urn:mrn:signalk:uuid:x-y-z/";
 
 /* ------------------ Dashboard Components ------------------ */
-const GPS = () => ({
-    meta: {
-        title: "GPS",
-        data: ["Num. of Satellites", "Latitude", "Longitude"],
-        endpoint: SELF + "navigation/",
-        show: true,
-    },
-
-    data: [0, 0.0, 0.0],
-
-    async init() {
-        this.data[0] = await UTILS.fetchText(
-            this.meta.endpoint + "gnss/satellites/value/"
-        );
-        Object.values(
-            await UTILS.fetchJSON(this.meta.endpoint + "position/value/")
-        ).forEach((value, index) => (this.data[index + 1] = UTILS.trim(value)));
-
-        // refresh data every 3 seconds
-        setTimeout(() => this.init(), 3000);
-    },
-});
-
-const AIS = () => ({
-    meta: {
-        title: "AIS",
-        data: ["Target MMSI", "Target Class", "Distance to Target (m)"],
-        endpoint: SERVER + "vessels/",
-        show: true,
-    },
-
-    data: ["", "", 0.0],
-
-    async init() {
-        const vessels = await UTILS.fetchJSON(this.meta.endpoint);
-
-        // get { mmsi, class, distance } of nearest vessel
-        [this.data[0], this.data[1], this.data[2]] = Object.values(
-            UTILS.getNearestVessel(vessels)
-        );
-
-        // refresh data every 3 seconds
-        setTimeout(() => this.init(), 3000);
-    },
-});
-
-const DEPTH = () => ({
-    meta: {
-        title: "Depth",
-        data: [
-            "Below Transducer (m)",
-            "Transducer to Keel (m)",
-            "Below Keel (m)",
-        ],
-        endpoint: SELF + "environment/depth/",
-        show: true,
-    },
-
-    data: [0.0, 0.0, 0.0],
-
-    async init() {
-        [this.data[0], this.data[1], this.data[2]] = await Promise.all([
-            UTILS.fetchText(
-                this.meta.endpoint + "belowTransducer/value/",
-                UTILS.trim,
-                [3]
-            ),
-            UTILS.fetchText(
-                this.meta.endpoint + "transducerToKeel/value/",
-                UTILS.trim,
-                [3]
-            ),
-            UTILS.fetchText(
-                this.meta.endpoint + "belowKeel/value/",
-                UTILS.trim,
-                [3]
-            ),
-        ]);
-
-        // refresh data every 3 seconds
-        setTimeout(() => this.init(), 3000);
-    },
-});
-
-const WIND = () => ({
-    meta: {
-        title: "Wind",
-        data: ["Apparent Speed (m/s)", "Angle from Port (rad)"],
-        endpoint: SELF + "environment/wind/",
-        show: true,
-    },
-
-    data: [0.0, 0.0],
-
-    async init() {
-        [this.data[0], this.data[1]] = await Promise.all([
-            UTILS.fetchText(
-                this.meta.endpoint + "speedApparent/value/",
-                UTILS.trim,
-                [3]
-            ),
-            UTILS.fetchText(
-                this.meta.endpoint + "angleApparent/value/",
-                UTILS.trim,
-                [3]
-            ),
-        ]);
-
-        // refresh data every 3 seconds
-        setTimeout(() => this.init(), 3000);
-    },
-});
-
-const AUDIO = () => ({
-    meta: {
-        title: "Audio",
-        data: ["File", "Status"],
-        endpoint: OTHER + "audio/",
-        show: false,
-    },
-
-    data: ["", ""],
-
-    async init() {
-        // remove bounding quotes
-        const unquote = (s) => s.slice(1, -1);
-
-        [this.data[0], this.data[1]] = await Promise.all([
-            UTILS.fetchText(this.meta.endpoint + "filename/value/", unquote),
-            UTILS.fetchText(this.meta.endpoint + "status/value/", unquote),
-        ]);
-
-        // refresh data every 3 seconds
-        setTimeout(() => this.init(), 3000);
-    },
-});
-
 const COMPONENTS = {
-    gps: GPS,
-    ais: AIS,
-    depth: DEPTH,
-    wind: WIND,
-    // audio: AUDIO,
+    GPS: () => ({
+        meta: {
+            title: "GPS",
+            data: ["Num. of Satellites", "Latitude", "Longitude"],
+            endpoint: SELF + "navigation/",
+            show: true,
+        },
+
+        data: [0, 0.0, 0.0],
+
+        async init() {
+            this.data[0] = await UTILS.fetchText(
+                this.meta.endpoint + "gnss/satellites/value/"
+            );
+            Object.values(
+                await UTILS.fetchJSON(this.meta.endpoint + "position/value/")
+            ).forEach(
+                (value, index) => (this.data[index + 1] = UTILS.trim(value))
+            );
+
+            // refresh data every 3 seconds
+            setTimeout(() => this.init(), 3000);
+        },
+    }),
+
+    AIS: () => ({
+        meta: {
+            title: "AIS",
+            data: ["Target MMSI", "Target Class", "Distance to Target (m)"],
+            endpoint: SERVER + "vessels/",
+            show: true,
+        },
+
+        data: ["", "", 0.0],
+
+        async init() {
+            const vessels = await UTILS.fetchJSON(this.meta.endpoint);
+
+            // get { mmsi, class, distance } of nearest vessel
+            [this.data[0], this.data[1], this.data[2]] = Object.values(
+                UTILS.getNearestVessel(vessels)
+            );
+
+            // refresh data every 3 seconds
+            setTimeout(() => this.init(), 3000);
+        },
+    }),
+
+    DEPTH: () => ({
+        meta: {
+            title: "Depth",
+            data: [
+                "Below Transducer (m)",
+                "Transducer to Keel (m)",
+                "Below Keel (m)",
+            ],
+            endpoint: SELF + "environment/depth/",
+            show: true,
+        },
+
+        data: [0.0, 0.0, 0.0],
+
+        async init() {
+            [this.data[0], this.data[1], this.data[2]] = await Promise.all([
+                UTILS.fetchText(
+                    this.meta.endpoint + "belowTransducer/value/",
+                    UTILS.trim,
+                    [3]
+                ),
+                UTILS.fetchText(
+                    this.meta.endpoint + "transducerToKeel/value/",
+                    UTILS.trim,
+                    [3]
+                ),
+                UTILS.fetchText(
+                    this.meta.endpoint + "belowKeel/value/",
+                    UTILS.trim,
+                    [3]
+                ),
+            ]);
+
+            // refresh data every 3 seconds
+            setTimeout(() => this.init(), 3000);
+        },
+    }),
+
+    WIND: () => ({
+        meta: {
+            title: "Wind",
+            data: ["Apparent Speed (m/s)", "Angle from Port (rad)"],
+            endpoint: SELF + "environment/wind/",
+            show: true,
+        },
+
+        data: [0.0, 0.0],
+
+        async init() {
+            [this.data[0], this.data[1]] = await Promise.all([
+                UTILS.fetchText(
+                    this.meta.endpoint + "speedApparent/value/",
+                    UTILS.trim,
+                    [3]
+                ),
+                UTILS.fetchText(
+                    this.meta.endpoint + "angleApparent/value/",
+                    UTILS.trim,
+                    [3]
+                ),
+            ]);
+
+            // refresh data every 3 seconds
+            setTimeout(() => this.init(), 3000);
+        },
+    }),
+
+    AUDIO: () => ({
+        meta: {
+            title: "Audio",
+            data: ["File", "Status"],
+            endpoint: OTHER + "audio/",
+            show: false,
+        },
+
+        data: ["", ""],
+
+        async init() {
+            // remove bounding quotes
+            const unquote = (s) => s.slice(1, -1);
+
+            [this.data[0], this.data[1]] = await Promise.all([
+                UTILS.fetchText(
+                    this.meta.endpoint + "filename/value/",
+                    unquote
+                ),
+                UTILS.fetchText(this.meta.endpoint + "status/value/", unquote),
+            ]);
+
+            // refresh data every 3 seconds
+            setTimeout(() => this.init(), 3000);
+        },
+    }),
 };
 
 /* -------------------- Utility Functions ------------------- */
@@ -181,8 +178,8 @@ const UTILS = {
         return callback == null
             ? res
             : callbackArgs == null
-                ? callback(res)
-                : callback(res, ...callbackArgs);
+            ? callback(res)
+            : callback(res, ...callbackArgs);
     },
     getVesselDistance(p1, p2) {
         /** haversine formula
@@ -200,9 +197,9 @@ const UTILS = {
         const a =
             Math.sin(yDelta / 2) * Math.sin(yDelta / 2) +
             Math.cos(y1) *
-            Math.cos(y2) *
-            Math.sin(xDelta / 2) *
-            Math.sin(xDelta / 2);
+                Math.cos(y2) *
+                Math.sin(xDelta / 2) *
+                Math.sin(xDelta / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
         return (R * c).toFixed(3); // distance between coordinates in metres

@@ -7,31 +7,10 @@
         <meta name="description" content="Vessel and Environment Information" />
         <title>Dashboard</title>
         <link rel="stylesheet" href="mvp.css" />
-        <style>
-            [x-cloak] {
-                display: none !important;
-            }
-
-            aside > h3 {
-                text-transform: uppercase;
-            }
-
-            aside > hr,
-            section > hr {
-                margin-block: 0.5em;
-            }
-
-            aside > p > span:nth-child(1) {
-                font-weight: bold;
-            }
-
-            aside > p > span:nth-child(2) {
-                float: right;
-            }
-        </style>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="script.js"></script>
         <script defer src="alpine.min.js"></script>
     </head>
-
     <body>
         <header>
             <h1>Dashboard</h1>
@@ -44,6 +23,7 @@
                     <aside
                         x-cloak
                         x-data="component"
+                        x-show="meta.show"
                         x-transition
                     >
                         <h3 x-text="meta.title"></h3>
@@ -58,6 +38,5 @@
                 </template>
             </section>
         </main>
-        <script src="script.js"></script>
     </body>
 </html>
