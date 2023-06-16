@@ -39,86 +39,11 @@
             <hr />
         </header>
         <main>
-            <!-- <section>
-                <aside x-cloak x-data="GPS" x-show="meta.show" x-transition>
-                    <h3 x-text="meta.title"></h3>
-                    <hr />
-                    <p>
-                        <span x-text="meta.data[0]"></span>:
-                        <span x-text="data[0]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[1]"></span>:
-                        <span x-text="data[1]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[2]"></span>:
-                        <span x-text="data[2]"></span>
-                    </p>
-                </aside>
-                <aside x-cloak x-data="AIS" x-show="meta.show" x-transition>
-                    <h3 x-text="meta.title"></h3>
-                    <hr />
-                    <p>
-                        <span x-text="meta.data[0]"></span>:
-                        <span x-text="data[0]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[1]"></span>:
-                        <span x-text="data[1]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[2]"></span>:
-                        <span x-text="data[2]"></span>
-                    </p>
-                </aside>
-                <aside x-cloak x-data="DEPTH" x-show="meta.show" x-transition>
-                    <h3 x-text="meta.title"></h3>
-                    <hr />
-                    <p>
-                        <span x-text="meta.data[0]"></span>:
-                        <span x-text="data[0]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[1]"></span>:
-                        <span x-text="data[1]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[2]"></span>:
-                        <span x-text="data[2]"></span>
-                    </p>
-                </aside>
-                <aside x-cloak x-data="WIND" x-show="meta.show" x-transition>
-                    <h3 x-text="meta.title"></h3>
-                    <hr />
-                    <p>
-                        <span x-text="meta.data[0]"></span>:
-                        <span x-text="data[0]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[1]"></span>:
-                        <span x-text="data[1]"></span>
-                    </p>
-                </aside>
-                <aside x-cloak x-data="AUDIO" x-show="meta.show" x-transition>
-                    <h3 x-text="meta.title"></h3>
-                    <hr />
-                    <p>
-                        <span x-text="meta.data[0]"></span>:
-                        <span x-text="data[0]"></span>
-                    </p>
-                    <p>
-                        <span x-text="meta.data[1]"></span>:
-                        <span x-text="data[1]"></span>
-                    </p>
-                </aside>
-            </section> --> 
             <section x-data="{ components : COMPONENTS }">
                 <template x-for="component in Object.values(components)">
                     <aside
                         x-cloak
                         x-data="component"
-                        x-show="meta.show"
                         x-transition
                     >
                         <h3 x-text="meta.title"></h3>
